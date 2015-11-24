@@ -8,8 +8,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Rubric', 'url'=>array('index')),
-	array('label'=>'Manage Rubric', 'url'=>array('admin')),
+	array('label'=>'List Rubric', 'url'=>array('index'), 'visible'=>!Yii::app()->user->isGuest),
+	array('label'=>'Manage Rubric', 'url'=>array('admin'), 'visible'=>Yii::app()->user->isAdmin()),
 );
 ?>
 

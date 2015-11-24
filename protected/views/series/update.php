@@ -9,10 +9,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Series', 'url'=>array('index')),
-	array('label'=>'Create Series', 'url'=>array('create')),
-	array('label'=>'View Series', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Series', 'url'=>array('admin')),
+	array('label'=>'List Series', 'url'=>array('index'), 'visible'=>!Yii::app()->user->isGuest),
+	array('label'=>'Create Series', 'url'=>array('create'), 'visible'=>Yii::app()->user->isAdmin()),
+	array('label'=>'View Series', 'url'=>array('view', 'id'=>$model->id), 'visible'=>!Yii::app()->user->isGuest),
+	array('label'=>'Manage Series', 'url'=>array('admin'), 'visible'=>Yii::app()->user->isAdmin()),
 );
 ?>
 

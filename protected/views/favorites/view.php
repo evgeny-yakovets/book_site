@@ -9,10 +9,10 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'List Favorites', 'url'=>array('index')),
-	array('label'=>'Create Favorites', 'url'=>array('create')),
-	array('label'=>'Update Favorites', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Favorites', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Favorites', 'url'=>array('admin')),
+	array('label'=>'Create Favorites', 'url'=>array('create'), 'visible'=>Yii::app()->user->isAdmin()),
+	array('label'=>'Update Favorites', 'url'=>array('update', 'id'=>$model->id), 'visible'=>Yii::app()->user->isAdmin()),
+	array('label'=>'Delete Favorites', 'url'=>'#', 'visible'=>Yii::app()->user->isAdmin(), 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Manage Favorites', 'url'=>array('admin'), 'visible'=>Yii::app()->user->isAdmin()),
 );
 ?>
 

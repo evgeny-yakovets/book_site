@@ -8,11 +8,11 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Rubric', 'url'=>array('index')),
-	array('label'=>'Create Rubric', 'url'=>array('create')),
-	array('label'=>'Update Rubric', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Rubric', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Rubric', 'url'=>array('admin')),
+	array('label'=>'List Rubric', 'url'=>array('index'), 'visible'=>!Yii::app()->user->isGuest),
+	array('label'=>'Create Rubric', 'url'=>array('create'), 'visible'=>Yii::app()->user->isAdmin()),
+	array('label'=>'Update Rubric', 'url'=>array('update', 'id'=>$model->id), 'visible'=>!Yii::app()->user->isGuest),
+	array('label'=>'Delete Rubric', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?'), 'visible'=>Yii::app()->user->isAdmin()),
+	array('label'=>'Manage Rubric', 'url'=>array('admin'), 'visible'=>Yii::app()->user->isAdmin()),
 );
 ?>
 

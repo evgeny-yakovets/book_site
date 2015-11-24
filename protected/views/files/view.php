@@ -26,5 +26,6 @@ $this->menu=array(
 		'title',
 		'book_id',
 		'series_id',
+		'url',
 	),
 )); ?>

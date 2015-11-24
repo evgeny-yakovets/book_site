@@ -8,8 +8,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Review', 'url'=>array('index')),
-	array('label'=>'Create Review', 'url'=>array('create')),
+	array('label'=>'List Review', 'url'=>array('index'), 'visible'=>!Yii::app()->user->isGuest),
+	array('label'=>'Create Review', 'url'=>array('create'), 'visible'=>Yii::app()->user->isAdmin()),
 );
 
 Yii::app()->clientScript->registerScript('search', "

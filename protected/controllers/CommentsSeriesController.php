@@ -1,6 +1,6 @@
 <?php
 
-class BookController extends Controller
+class CommentsSeriesController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -52,7 +52,7 @@ class BookController extends Controller
 	public function actionView($id)
 	{
 		$this->render('view',array(
-			'model' => $this->loadModel($id),
+			'model'=>$this->loadModel($id),
 		));
 	}
 
@@ -62,16 +62,16 @@ class BookController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Book;
+		$model=new CommentsSeries;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Book']))
+		if(isset($_POST['CommentsSeries']))
 		{
-			$model->attributes=$_POST['Book'];
+			$model->attributes=$_POST['CommentsSeries'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->comment_id));
 		}
 
 		$this->render('create',array(
@@ -91,11 +91,11 @@ class BookController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Book']))
+		if(isset($_POST['CommentsSeries']))
 		{
-			$model->attributes=$_POST['Book'];
+			$model->attributes=$_POST['CommentsSeries'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->comment_id));
 		}
 
 		$this->render('update',array(
@@ -122,7 +122,7 @@ class BookController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Book');
+		$dataProvider=new CActiveDataProvider('CommentsSeries');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -133,10 +133,10 @@ class BookController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Book('search');
+		$model=new CommentsSeries('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Book']))
-			$model->attributes=$_GET['Book'];
+		if(isset($_GET['CommentsSeries']))
+			$model->attributes=$_GET['CommentsSeries'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -147,15 +147,12 @@ class BookController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Book the loaded model
+	 * @return CommentsSeries the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Book::model()->findByPk($id);
-		$model['rubric'] = RubricsBooks::model()->findAllByAttributes(array('book_id' => $id));
-/*		print_r($model['rubric']);
-		die();*/
+		$model=CommentsSeries::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -163,11 +160,11 @@ class BookController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Book $model the model to be validated
+	 * @param CommentsSeries $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='book-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='comments-series-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

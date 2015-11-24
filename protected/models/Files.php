@@ -9,11 +9,12 @@
  * @property string $title
  * @property integer $book_id
  * @property integer $series_id
+ * @property string $url
  */
 class Files extends CActiveRecord
 {
 	/**
-	 * @return string the associated databases table name
+	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
@@ -28,13 +29,13 @@ class Files extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('type, title', 'required'),
+			array('type, title, url', 'required'),
 			array('book_id, series_id', 'numerical', 'integerOnly'=>true),
 			array('type', 'length', 'max'=>10),
 			array('title', 'length', 'max'=>80),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, type, title, book_id, series_id', 'safe', 'on'=>'search'),
+			array('id, type, title, book_id, series_id, url', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,6 +61,7 @@ class Files extends CActiveRecord
 			'title' => 'Title',
 			'book_id' => 'Book',
 			'series_id' => 'Series',
+			'url' => 'Url',
 		);
 	}
 
@@ -86,6 +88,7 @@ class Files extends CActiveRecord
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('book_id',$this->book_id);
 		$criteria->compare('series_id',$this->series_id);
+		$criteria->compare('url',$this->url,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
