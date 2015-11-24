@@ -43,6 +43,12 @@
 		<?php echo $form->error($model,'series_id'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'url'); ?>
+		<?php echo $form->textArea($model,'url',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->error($model,'url'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

@@ -8,8 +8,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Rubric', 'url'=>array('index')),
-	array('label'=>'Create Rubric', 'url'=>array('create')),
+	array('label'=>'List Rubric', 'url'=>array('index'), 'visible'=>!Yii::app()->user->isGuest),
+	array('label'=>'Create Rubric', 'url'=>array('create'), 'visible'=>Yii::app()->user->isAdmin()),
 );
 
 Yii::app()->clientScript->registerScript('search', "

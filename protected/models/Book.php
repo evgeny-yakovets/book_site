@@ -12,6 +12,7 @@
  */
 class Book extends CActiveRecord
 {
+	public $rubric;
 	/**
 	 * @return string the associated databases table name
 	 */

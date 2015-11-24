@@ -25,5 +25,9 @@
 	<?php echo CHtml::encode($data->series_id); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('url')); ?>:</b>
+	<?php echo CHtml::encode($data->url); ?>
+	<br />
+
 
 </div>

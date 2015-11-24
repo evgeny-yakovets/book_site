@@ -9,10 +9,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Favorites', 'url'=>array('index')),
-	array('label'=>'Create Favorites', 'url'=>array('create')),
-	array('label'=>'View Favorites', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Favorites', 'url'=>array('admin')),
+	array('label'=>'List Favorites', 'url'=>array('index'), 'visible'=>!Yii::app()->user->isGuest),
+	array('label'=>'Create Favorites', 'url'=>array('create'), 'visible'=>Yii::app()->user->isAdmin()),
+	array('label'=>'View Favorites', 'url'=>array('view', 'id'=>$model->id), 'visible'=>!Yii::app()->user->isGuest),
+	array('label'=>'Manage Favorites', 'url'=>array('admin'), 'visible'=>Yii::app()->user->isAdmin()),
 );
 ?>
 
