@@ -16,17 +16,26 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Book #<?php echo $model->id; ?></h1>
+<h1><?php echo $model->title; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id',
 		'title',
 		'year',
 		'description',
 		'text_preview',
 	),
 ));
-
-print_r($model->rubric['0']);
+if(isset($model->rubric[0])) {
+	echo '<h6>Rubrics</h6>';
+	foreach ($model->rubric as $rubric)
+		$this->widget('zii.widgets.CDetailView', array(
+			'data' => $rubric,
+			'attributes' => array(
+				'title',
+			),
+		));
+}
+//var_dump($model);
+//$this->renderPartial('_form', array('model'=>new Comment()));

@@ -70,8 +70,12 @@ class FilesController extends Controller
 		if(isset($_POST['Files']))
 		{
 			$model->attributes=$_POST['Files'];
-			if($model->save())
+			$model->file=CUploadedFile::getInstance($model,'file');
+			if($model->save()) {
+				$path = Yii::getPathOfAlias('webroot') . '/upload/' . $model->file->getName();
+				$model->file->saveAs($path);
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('create',array(

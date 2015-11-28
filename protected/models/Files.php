@@ -13,6 +13,7 @@
  */
 class Files extends CActiveRecord
 {
+	public $file;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -33,6 +34,7 @@ class Files extends CActiveRecord
 			array('book_id, series_id', 'numerical', 'integerOnly'=>true),
 			array('type', 'length', 'max'=>10),
 			array('title', 'length', 'max'=>80),
+			array('file', 'file', 'types'=>'pdf, fb2'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, type, title, book_id, series_id, url', 'safe', 'on'=>'search'),

@@ -153,9 +153,15 @@ class BookController extends Controller
 	public function loadModel($id)
 	{
 		$model=Book::model()->findByPk($id);
-		$model['rubric'] = RubricsBooks::model()->findAllByAttributes(array('book_id' => $id));
-/*		print_r($model['rubric']);
-		die();*/
+
+		$model['rubric'] = Rubric::model()->findAllBySql('
+		SELECT r.title
+		FROM db_rubric AS r
+		INNER JOIN db_rubrics_books AS rb
+		ON rb.rubric_id = r.id
+		WHERE rb.book_id = '.$id
+		);
+
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
