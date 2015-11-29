@@ -66,7 +66,16 @@ class BookController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
+		if(isset($_POST['Comment']))
+		{
+			$commentModel = new Comment;
+			var_dump($_POST['Comment']);
+			die();
+			$_POST['Comment']['author'] = Yii::app()->user->name;
+			$commentModel->attributes=$_POST['Comment'];
+			if($commentModel->save())
+				$this->redirect(array('view','id'=>$model->id));
+		}
 		if(isset($_POST['Book']))
 		{
 			$model->attributes=$_POST['Book'];
@@ -154,13 +163,37 @@ class BookController extends Controller
 	{
 		$model=Book::model()->findByPk($id);
 
-		$model['rubric'] = Rubric::model()->findAllBySql('
+		$rubrics = Rubric::model()->findAllBySql('
 		SELECT r.title
 		FROM db_rubric AS r
 		INNER JOIN db_rubrics_books AS rb
 		ON rb.rubric_id = r.id
 		WHERE rb.book_id = '.$id
 		);
+		$string = '';
+		foreach ($rubrics as $rubric)
+		{
+			$string .= $rubric->title.', ';
+		}
+		$model['rubric'] = substr($string, 0, strlen($string)-2);
+		unset($string);
+
+		$model['comments'] = Comment::model()->findAllBySql('
+		SELECT *
+		FROM db_comment AS c
+		INNER JOIN db_comments_books AS cb
+		ON cb.commnet_id = c.id
+		WHERE cb.book_id = '.$id
+		);
+
+		$model['review'] = Review::model()->findAllBySql('
+		SELECT *
+		FROM db_review AS r
+		INNER JOIN db_reviews_books AS rb
+		ON rb.review_id = r.id
+		WHERE rb.book_id = '.$id
+		);
+
 
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');

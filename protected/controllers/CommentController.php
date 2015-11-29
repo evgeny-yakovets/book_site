@@ -60,18 +60,39 @@ class CommentController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($bookId = null,$seriesId = null)
 	{
 		$model=new Comment;
-
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Comment']))
 		{
+
+			$_POST['Comment']['author'] = Yii::app()->user->name;
+			$_POST['Comment']['date'] = date('d M Y H:i:s');
+
 			$model->attributes=$_POST['Comment'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			{
+				if(isset($bookId))
+				{
+					$commentsBooks = new CommentsBooks;
+					$commentsBooks->commnet_id= $model->id;
+					$commentsBooks->book_id = $bookId;
+					$commentsBooks->save();
+					$this->redirect(array('book/view/'.$bookId));
+				}
+				if(isset($seriesId))
+				{
+					$commentsSeries= new CommentsSeries;
+					$commentsSeries->comment_id= $model->id;
+					$commentsSeries->series_id = $seriesId;
+					$commentsSeries->save();
+					$this->redirect(array('series/view/'.$seriesId));
+				}
+			}
+
 		}
 
 		$this->render('create',array(

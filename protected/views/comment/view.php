@@ -2,11 +2,20 @@
 /* @var $this CommentController */
 /* @var $model Comment */
 
-$this->breadcrumbs=array(
-	'Comments'=>array('index'),
-	$model->id,
-);
 
+if(!Yii::app()->user->isGuest && !Yii::app()->user->isAdmin())
+{
+	$this->breadcrumbs = array(
+		$model->id,
+	);
+}
+elseif (!Yii::app()->user->isGuest && Yii::app()->user->isAdmin())
+{
+	$this->breadcrumbs=array(
+		'Comments'=>array('index'),
+		$model->id,
+	);
+}
 $this->menu=array(
 	array('label'=>'List Comment', 'url'=>array('index')),
 	array('label'=>'Create Comment', 'url'=>array('create')),

@@ -13,12 +13,15 @@ $this->menu=array(
 	array('label'=>'Update Book', 'url'=>array('update', 'id'=>$model->id), 'visible'=>Yii::app()->user->isAdmin()),
 	array('label'=>'Delete Book', 'url'=>'#', 'visible'=>Yii::app()->user->isAdmin(), 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Manage Book', 'url'=>array('admin'), 'visible'=>Yii::app()->user->isAdmin()),
+	array('label'=>'Add comment', 'url'=>array('/comment/create','bookId'=>$model->id), 'visible'=>!Yii::app()->user->isGuest),
 );
 ?>
 
 <h1><?php echo $model->title; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
+<?php
+
+$this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'title',
@@ -26,16 +29,60 @@ $this->menu=array(
 		'description',
 		'text_preview',
 	),
-));
-if(isset($model->rubric[0])) {
-	echo '<h6>Rubrics</h6>';
-	foreach ($model->rubric as $rubric)
+));?>
+<?php
+
+if(isset($model->rubric)) {
 		$this->widget('zii.widgets.CDetailView', array(
-			'data' => $rubric,
+			'data' => $model,
 			'attributes' => array(
-				'title',
+				'rubric',
 			),
 		));
 }
+?>
+	<br>
+	<h3> <?php echo 'Reviews:'; ?></h3>
+<?php
+if(isset($model->review))
+{
+	foreach($model->review as $review) {
+		$this->widget('zii.widgets.CDetailView', array(
+			'data' => $review->attributes,
+			'attributes' => array(
+				'title',
+				'author',
+				'date',
+				'text',
+				'review_link',
+			),
+		));
+	}
+}
 //var_dump($model);
-//$this->renderPartial('_form', array('model'=>new Comment()));
+//$this->renderPartial('_form', array('model'=>$model));
+?>
+
+	<br>
+	<h3> <?php echo 'Comments:'; ?></h3>
+
+<?php
+
+if(isset($model->comments))
+{
+	$i = 0;
+	foreach($model->comments as $comment)
+	{
+		$i++;
+		echo '<h6>Comment #'.$i.'</h6>';
+		$this->widget('zii.widgets.CDetailView', array(
+			'data' => $comment->attributes,
+			'attributes' => array(
+				'author',
+				'date',
+				'text',
+			),
+		));
+	}
+
+}?>
