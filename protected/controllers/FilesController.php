@@ -60,7 +60,7 @@ class FilesController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($bookId = null, $seriesId = null)
 	{
 		$model=new Files;
 
@@ -70,8 +70,16 @@ class FilesController extends Controller
 		if(isset($_POST['Files']))
 		{
 			$model->attributes=$_POST['Files'];
-			$model->file=CUploadedFile::getInstance($model,'file');
-			if($model->save()) {
+			$model->file=CUploadedFile::getInstance($model,'files');
+			$model->type = $model->file->type;
+			$model->title = $model->file->name;
+			$model->book_id = $bookId;
+			$model->url = Yii::getPathOfAlias('webroot') . '/upload/' . $model->file->getName();
+			//$path = Yii::getPathOfAlias('webroot') . '/upload/' . $model->file->getName();
+/*			var_dump($model->attributes);
+			die();*/
+			if($model->save())
+			{
 				$path = Yii::getPathOfAlias('webroot') . '/upload/' . $model->file->getName();
 				$model->file->saveAs($path);
 				$this->redirect(array('view','id'=>$model->id));

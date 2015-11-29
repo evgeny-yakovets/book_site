@@ -16,8 +16,15 @@ $this->menu=array(
 <h1>Create Files</h1>
 
 <?php //$this->renderPartial('_form', array('model'=>$model)); ?>
-<?php echo CHtml::form('','post',array('enctype'=>'multipart/form-data')); ?>
 
-<?php echo CHtml::activeFileField($model, 'file'); ?>
 
-<?php echo CHtml::endForm(); ?>
+
+	<?php echo CHtml::form('','post',array('enctype'=>'multipart/form-data')); ?>
+
+	<?php echo CHtml::activeFileField($model, 'files'); ?>
+<div class="row buttons">
+	<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+</div>
+	<?php echo CHtml::endForm(); ?>
+
+

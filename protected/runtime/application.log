@@ -3326,3 +3326,24 @@ Stack trace:
 #30 {main}
 REQUEST_URI=/book/1
 ---
+2015/11/29 23:17:32 [warning] [application] Failed to set unsafe attribute "files" of "Files".
+in /var/www/html/protected/controllers/FilesController.php (72)
+in /var/www/html/index.php (13)
+2015/11/29 23:23:00 [warning] [application] Failed to set unsafe attribute "files" of "Files".
+in /var/www/html/protected/controllers/FilesController.php (72)
+in /var/www/html/index.php (13)
+2015/11/29 23:23:37 [warning] [application] Failed to set unsafe attribute "files" of "Files".
+in /var/www/html/protected/controllers/FilesController.php (72)
+in /var/www/html/index.php (13)
+2015/11/29 23:23:58 [warning] [application] Failed to set unsafe attribute "files" of "Files".
+in /var/www/html/protected/controllers/FilesController.php (72)
+in /var/www/html/index.php (13)
+2015/11/29 23:25:00 [warning] [application] Failed to set unsafe attribute "files" of "Files".
+in /var/www/html/protected/controllers/FilesController.php (72)
+in /var/www/html/index.php (13)
+2015/11/29 23:26:11 [warning] [application] Failed to set unsafe attribute "files" of "Files".
+in /var/www/html/protected/controllers/FilesController.php (72)
+in /var/www/html/index.php (13)
+2015/11/29 23:27:09 [warning] [application] Failed to set unsafe attribute "files" of "Files".
+in /var/www/html/protected/controllers/FilesController.php (72)
+in /var/www/html/index.php (13)
