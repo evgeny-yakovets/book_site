@@ -75,9 +75,7 @@ class FilesController extends Controller
 			$model->title = $model->file->name;
 			$model->book_id = $bookId;
 			$model->url = Yii::getPathOfAlias('webroot') . '/upload/' . $model->file->getName();
-			//$path = Yii::getPathOfAlias('webroot') . '/upload/' . $model->file->getName();
-/*			var_dump($model->attributes);
-			die();*/
+
 			if($model->save())
 			{
 				$path = Yii::getPathOfAlias('webroot') . '/upload/' . $model->file->getName();
