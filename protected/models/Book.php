@@ -15,6 +15,7 @@ class Book extends CActiveRecord
 	public $rubric;
 	public $comments;
 	public $review;
+	public $files;
 	/**
 	 * @return string the associated databases table name
 	 */

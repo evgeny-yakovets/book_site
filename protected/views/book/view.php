@@ -41,6 +41,39 @@ if(isset($model->rubric)) {
 		));
 }
 ?>
+
+<!--	<table class="detail-view" id="yw1">
+		<tbody>
+		<tr class="odd">
+			<th>Files</th>
+			<td>-->
+				<?php
+/*					if(isset($model->files))
+					{
+						foreach($model->files as $file)
+						{
+							echo CHtml::link(CHtml::encode($file->type), array('view', 'id'=>$file->url))."<br>";
+						}
+					}*/
+				?>
+<!--			</td>
+		</tr>
+		</tbody>
+	</table>-->
+
+	<div class="view">
+		<b><?php echo CHtml::encode('Files:')."<br>"; ?></b>
+		<?php
+			if(isset($model->files))
+			{
+				foreach($model->files as $file)
+				{
+					//echo CHtml::link(CHtml::encode($file->type), array('view', 'id'=>'GetFile/'.$file->title))."<br>";
+					echo "<a href=".'GetFile/'.$file->title.">".$file->type."</a><br>";
+				}
+			}
+		?>
+	</div>
 	<br>
 	<h3> <?php echo 'Reviews:'; ?></h3>
 <?php

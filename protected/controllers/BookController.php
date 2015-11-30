@@ -194,10 +194,37 @@ class BookController extends Controller
 		WHERE rb.book_id = '.$id
 		);
 
+		$model['files'] = Files::model()->findAllBySql('
+		SELECT f.type, f.title
+		FROM db_files AS f
+		WHERE f.book_id = '.$id
+		);
+
 
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
+	}
+
+	public function actionGetFile($fileName = NULL)
+	{
+
+		if ($fileName !== NULL) {
+			// некоторая логика по обработке пути из url в путь до файла на сервере
+			$currentFile = 'http://localhost/upload/';
+			var_dump($currentFile);
+			var_dump($fileName);
+			die();
+            if (is_file($currentFile)) {
+				header("Content-Type: application/octet-stream");
+				header("Accept-Ranges: bytes");
+				header("Content-Length: " . filesize($currentFile));
+				header("Content-Disposition: attachment; filename=" . $fileName);
+                readfile($currentFile);
+            };
+        } else {
+			$this->redirect(array('view','id'=>Yii::app()->basePath));
+		};
 	}
 
 	/**

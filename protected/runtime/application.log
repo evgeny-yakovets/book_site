@@ -3416,3 +3416,98 @@ in /var/www/html/index.php (13)
 2015/11/30 20:24:04 [warning] [application] Failed to set unsafe attribute "files" of "Files".
 in /var/www/html/protected/controllers/FilesController.php (72)
 in /var/www/html/index.php (13)
+2015/11/30 22:11:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "123.pdf".' in /var/www/yii_install/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii_install/framework/web/CController.php(270): CController->missingAction('123.pdf')
+#1 /var/www/yii_install/framework/web/CWebApplication.php(282): CController->run('123.pdf')
+#2 /var/www/yii_install/framework/web/CWebApplication.php(141): CWebApplication->runController('book/123.pdf')
+#3 /var/www/yii_install/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#4 /var/www/html/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/book/123.pdf
+HTTP_REFERER=http://localhost/book/1
+---
+2015/11/30 22:12:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "123.pdf".' in /var/www/yii_install/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii_install/framework/web/CController.php(270): CController->missingAction('123.pdf')
+#1 /var/www/yii_install/framework/web/CWebApplication.php(282): CController->run('123.pdf')
+#2 /var/www/yii_install/framework/web/CWebApplication.php(141): CWebApplication->runController('book/123.pdf')
+#3 /var/www/yii_install/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#4 /var/www/html/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/book/123.pdf
+HTTP_REFERER=http://localhost/book/1
+---
+2015/11/30 22:35:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "localhost".' in /var/www/yii_install/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii_install/framework/web/CController.php(270): CController->missingAction('localhost')
+#1 /var/www/yii_install/framework/web/CWebApplication.php(282): CController->run('localhost')
+#2 /var/www/yii_install/framework/web/CWebApplication.php(141): CWebApplication->runController('book/localhost/...')
+#3 /var/www/yii_install/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#4 /var/www/html/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/book/localhost/upload/123.pdf
+HTTP_REFERER=http://localhost/book/1
+---
+2015/11/30 22:44:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "GetFile?fileName=123.pdf".' in /var/www/yii_install/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/yii_install/framework/web/CController.php(270): CController->missingAction('GetFile?fileNam...')
+#1 /var/www/yii_install/framework/web/CWebApplication.php(282): CController->run('GetFile?fileNam...')
+#2 /var/www/yii_install/framework/web/CWebApplication.php(141): CWebApplication->runController('book/GetFile?fi...')
+#3 /var/www/yii_install/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#4 /var/www/html/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/book/GetFile%3FfileName%3D123.pdf
+HTTP_REFERER=http://localhost/book/1
+---
+2015/11/30 22:52:57 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /var/www/yii_install/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii_install/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 /var/www/yii_install/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii_install/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii_install/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii_install/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii_install/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii_install/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii_install/framework/web/CWebApplication.php(282): CController->run('GetFile')
+#8 /var/www/yii_install/framework/web/CWebApplication.php(141): CWebApplication->runController('book/GetFile/12...')
+#9 /var/www/yii_install/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#10 /var/www/html/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/book/GetFile/123.pdf
+HTTP_REFERER=http://localhost/book/1
+---
+2015/11/30 22:53:25 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /var/www/yii_install/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii_install/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 /var/www/yii_install/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii_install/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii_install/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii_install/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii_install/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii_install/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii_install/framework/web/CWebApplication.php(282): CController->run('GetFile')
+#8 /var/www/yii_install/framework/web/CWebApplication.php(141): CWebApplication->runController('book/GetFile/12...')
+#9 /var/www/yii_install/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#10 /var/www/html/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/book/GetFile/123.pdf
+HTTP_REFERER=http://localhost/book/1
+---
+2015/11/30 22:54:13 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /var/www/yii_install/framework/web/auth/CAccessControlFilter.php:182
+Stack trace:
+#0 /var/www/yii_install/framework/web/auth/CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(WebUser), 'You are not aut...')
+#1 /var/www/yii_install/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/yii_install/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/yii_install/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/yii_install/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/yii_install/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/yii_install/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/yii_install/framework/web/CWebApplication.php(282): CController->run('GetFile')
+#8 /var/www/yii_install/framework/web/CWebApplication.php(141): CWebApplication->runController('book/GetFile/12...')
+#9 /var/www/yii_install/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#10 /var/www/html/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/book/GetFile/123.pdf
+HTTP_REFERER=http://localhost/book/1
+---
