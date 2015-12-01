@@ -71,8 +71,9 @@ class FilesController extends Controller
 		{
 			$model->attributes=$_POST['Files'];
 			$model->file=CUploadedFile::getInstance($model,'files');
-			$model->type = $model->file->type;
-			$model->title = $model->file->name;
+			$model->type = end(explode(".", $model->file->name));
+			$model->title = Yii::app()->TranslitHelper->transliterate($model->file->name);
+			$model->file->name = $model->title;
 			$model->book_id = $bookId;
 			$model->url = Yii::getPathOfAlias('webroot') . '/upload/' . $model->file->getName();
 

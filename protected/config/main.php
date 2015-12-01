@@ -78,6 +78,10 @@ return array(
 		// databases settings are configured in databases.php
 		'db'=>require(dirname(__FILE__).'/database.php'),
 
+		'TranslitHelper' => [
+			'class'=>'application.components.TranslitHelper'
+		],
+
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',

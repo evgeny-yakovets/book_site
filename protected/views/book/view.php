@@ -69,7 +69,8 @@ if(isset($model->rubric)) {
 				foreach($model->files as $file)
 				{
 					//echo CHtml::link(CHtml::encode($file->type), array('view', 'id'=>'GetFile/'.$file->title))."<br>";
-					echo "<a href=".'GetFile/'.$file->title.">".$file->type."</a><br>";
+					//echo "<a href=".'GetFile/'.$file->title.">".$file->type."</a><br>";
+					echo "<a href=http://localhost/upload/".$file->title.">".$file->type."</a><br>";
 				}
 			}
 		?>

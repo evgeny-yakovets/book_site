@@ -211,10 +211,10 @@ class BookController extends Controller
 
 		if ($fileName !== NULL) {
 			// некоторая логика по обработке пути из url в путь до файла на сервере
-			$currentFile = 'http://localhost/upload/';
-			var_dump($currentFile);
+			$currentFile = 'http://localhost/upload/'. $fileName;
+/*			var_dump($currentFile);
 			var_dump($fileName);
-			die();
+			die();*/
             if (is_file($currentFile)) {
 				header("Content-Type: application/octet-stream");
 				header("Accept-Ranges: bytes");
