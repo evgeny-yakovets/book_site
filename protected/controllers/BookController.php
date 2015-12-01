@@ -37,7 +37,7 @@ class BookController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -204,27 +204,6 @@ class BookController extends Controller
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
-	}
-
-	public function actionGetFile($fileName = NULL)
-	{
-
-		if ($fileName !== NULL) {
-			// некоторая логика по обработке пути из url в путь до файла на сервере
-			$currentFile = 'http://localhost/upload/'. $fileName;
-/*			var_dump($currentFile);
-			var_dump($fileName);
-			die();*/
-            if (is_file($currentFile)) {
-				header("Content-Type: application/octet-stream");
-				header("Accept-Ranges: bytes");
-				header("Content-Length: " . filesize($currentFile));
-				header("Content-Disposition: attachment; filename=" . $fileName);
-                readfile($currentFile);
-            };
-        } else {
-			$this->redirect(array('view','id'=>Yii::app()->basePath));
-		};
 	}
 
 	/**

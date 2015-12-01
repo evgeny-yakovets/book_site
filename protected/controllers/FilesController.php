@@ -37,7 +37,7 @@ class FilesController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -73,13 +73,13 @@ class FilesController extends Controller
 			$model->file=CUploadedFile::getInstance($model,'files');
 			$model->type = end(explode(".", $model->file->name));
 			$model->title = Yii::app()->TranslitHelper->transliterate($model->file->name);
-			$model->file->name = $model->title;
 			$model->book_id = $bookId;
 			$model->url = Yii::getPathOfAlias('webroot') . '/upload/' . $model->file->getName();
 
+
 			if($model->save())
 			{
-				$path = Yii::getPathOfAlias('webroot') . '/upload/' . $model->file->getName();
+				$path = Yii::getPathOfAlias('webroot') . '/upload/' . $model->title;
 				$model->file->saveAs($path);
 				$this->redirect(array('view','id'=>$model->id));
 			}
