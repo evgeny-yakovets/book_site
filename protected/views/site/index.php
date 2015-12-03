@@ -15,7 +15,7 @@ $this->menu=array(
 	array('label'=>'Comments', 'url'=>array('/comment/index'), 'visible'=>Yii::app()->user->isAdmin()),
 	array('label'=>'CommentsBooks', 'url'=>array('/commentsBooks/index'), 'visible'=>Yii::app()->user->isAdmin()),
 	array('label'=>'CommentsSeries', 'url'=>array('/commentsSeries/index'), 'visible'=>Yii::app()->user->isAdmin()),
-	array('label'=>'Favorites', 'url'=>array('/favorites/index'),'favoriteBooks'=>true),
+	array('label'=>'Favorites', 'url'=>array('/book/index','favoriteBooks'=>true)),
 	array('label'=>'Files', 'url'=>array('/files/index'), 'visible'=>Yii::app()->user->isAdmin()),
 	array('label'=>'Review', 'url'=>array('/review/index'), 'visible'=>Yii::app()->user->isAdmin()),
 	array('label'=>'ReviewsBooks', 'url'=>array('/reviewsBooks/index'), 'visible'=>Yii::app()->user->isAdmin()),
