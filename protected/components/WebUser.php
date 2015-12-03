@@ -7,7 +7,7 @@ class WebUser extends CWebUser {
 
     // Store model to not repeat query.
     private $_model;
-    protected $_id;
+    public $userId1;
     protected $_first_name;
     protected $_last_name;
     protected $_email;
@@ -42,9 +42,10 @@ class WebUser extends CWebUser {
 
     public function getUserId()
     {
-        if(isset($this->type))
+        if(isset($this->userId))
         {
-            return $this->type;
+            $this->$userId = $this->userId;
+            return $this->userId;
         }
         return "none";
     }

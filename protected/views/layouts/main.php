@@ -28,7 +28,8 @@
 
 	<div id="mainmenu">
 		<?php
-
+		var_dump(Yii::app()->user->type);
+		var_dump(Yii::app()->user->userId);
 		$this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),

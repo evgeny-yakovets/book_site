@@ -129,10 +129,31 @@ class BookController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex($favoriteBooks = 1)
+	public function actionIndex($favoriteBooks = null)
 	{
-		$dataProvider=new CActiveDataProvider('Book');
-		if(isset($favoriteBooks))
+		$params= array();
+		if($favoriteBooks)
+		{
+			$books = Book::model()->findAllBySql('
+				SELECT b.*
+				FROM db_book AS b
+				INNER JOIN db_favorites AS f
+				ON f.book_id = b.id
+				WHERE f.user_id = ' . Yii::app()->user->userId
+			);
+
+			foreach($books as $book)
+			{
+				$params[] = $book['id'];
+			}
+
+			$params = array(
+				//Критерий для запроса. В этом примере, выбираются все отзывы, которые прошли модерацию.
+				'criteria'=>array('condition'=> 'id IN ('. implode ( ",", $params ).')'));
+		}
+
+		$dataProvider=new CActiveDataProvider('Book', $params);
+/*		if(isset($favoriteBooks))
 		{
 			$favoriteBooks = Book::model()->findAllBySql('
 				SELECT b.*
@@ -142,14 +163,13 @@ class BookController extends Controller
 				WHERE f.user_id = 1'
 			);
 
-		}
+		}*/
 		//$dataProvider = $favoriteBooks;
 /*		var_dump($dataProvider);
 		die();*/
 		$this->render('index',
 			array(
 			'dataProvider'=>$dataProvider,
-			'favoriteBooks' => $favoriteBooks,
 		));
 	}
 
