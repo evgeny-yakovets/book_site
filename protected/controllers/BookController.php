@@ -129,11 +129,27 @@ class BookController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
+	public function actionIndex($favoriteBooks = 1)
 	{
 		$dataProvider=new CActiveDataProvider('Book');
-		$this->render('index',array(
+		if(isset($favoriteBooks))
+		{
+			$favoriteBooks = Book::model()->findAllBySql('
+				SELECT b.*
+				FROM db_book AS b
+				INNER JOIN db_favorites AS f
+				ON f.book_id = b.id
+				WHERE f.user_id = 1'
+			);
+
+		}
+		//$dataProvider = $favoriteBooks;
+/*		var_dump($dataProvider);
+		die();*/
+		$this->render('index',
+			array(
 			'dataProvider'=>$dataProvider,
+			'favoriteBooks' => $favoriteBooks,
 		));
 	}
 

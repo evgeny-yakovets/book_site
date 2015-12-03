@@ -93,8 +93,7 @@ if(isset($model->review))
 		));
 	}
 }
-//var_dump($model);
-//$this->renderPartial('_form', array('model'=>$model));
+
 ?>
 
 	<br>
