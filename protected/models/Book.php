@@ -9,6 +9,13 @@
  * @property integer $year
  * @property string $description
  * @property string $text_preview
+ *
+ * The followings are the available model relations:
+ * @property AuthorsBooks[] $authorsBooks
+ * @property CommentsBooks[] $commentsBooks
+ * @property ReviewsBooks[] $reviewsBooks
+ * @property RubricsBooks[] $rubricsBooks
+ * @property SeriesBooksAuthors[] $seriesBooksAuthors
  */
 class Book extends CActiveRecord
 {
@@ -17,7 +24,7 @@ class Book extends CActiveRecord
 	public $review;
 	public $files;
 	/**
-	 * @return string the associated databases table name
+	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
@@ -51,6 +58,11 @@ class Book extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'authorsBooks' => array(self::HAS_MANY, 'AuthorsBooks', 'book_id'),
+			'commentsBooks' => array(self::HAS_MANY, 'CommentsBooks', 'book_id'),
+			'reviewsBooks' => array(self::HAS_MANY, 'ReviewsBooks', 'book_id'),
+			'rubricsBooks' => array(self::HAS_MANY, 'RubricsBooks', 'book_id'),
+			'seriesBooksAuthors' => array(self::HAS_MANY, 'SeriesBooksAuthors', 'book_id'),
 		);
 	}
 

@@ -9,10 +9,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Author', 'url'=>array('index'), 'visible'=>!Yii::app()->user->isGuest),
-	array('label'=>'Create Author', 'url'=>array('create'), 'visible'=>Yii::app()->user->isAdmin()),
-	array('label'=>'View Author', 'url'=>array('view', 'id'=>$model->id), 'visible'=>Yii::app()->user->isAdmin()),
-	array('label'=>'Manage Author', 'url'=>array('admin'), 'visible'=>Yii::app()->user->isAdmin()),
+	array('label'=>'List Author', 'url'=>array('index')),
+	array('label'=>'Create Author', 'url'=>array('create')),
+	array('label'=>'View Author', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Manage Author', 'url'=>array('admin')),
 );
 ?>
 

@@ -7,11 +7,15 @@
  * @property integer $id
  * @property integer $book_id
  * @property integer $author_id
+ *
+ * The followings are the available model relations:
+ * @property Author $author
+ * @property Book $book
  */
 class AuthorsBooks extends CActiveRecord
 {
 	/**
-	 * @return string the associated databases table name
+	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
@@ -42,6 +46,8 @@ class AuthorsBooks extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'author' => array(self::BELONGS_TO, 'Author', 'author_id'),
+			'book' => array(self::BELONGS_TO, 'Book', 'book_id'),
 		);
 	}
 

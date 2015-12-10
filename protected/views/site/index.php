@@ -5,10 +5,13 @@ $this->pageTitle=Yii::app()->name;
 ?>
 
 <?php
-
-
+$userUrl = '';
+if(!Yii::app()->user->isGuest)
+{
+	$userUrl = Yii::app()->user->userId;
+}
 $this->menu=array(
-	array('label'=>'User', 'url'=>array('/user/'.Yii::app()->user->userId), 'visible'=>!Yii::app()->user->isGuest),
+	array('label'=>'User','url' => array('/user/'.$userUrl), 'visible'=>!Yii::app()->user->isGuest),
 	array('label'=>'Author', 'url'=>array('/author/index'), 'visible'=>Yii::app()->user->isAdmin()),
 	array('label'=>'AuthorsBooks', 'url'=>array('/authorsBooks/index'), 'visible'=>Yii::app()->user->isAdmin()),
 	array('label'=>'Books', 'url'=>array('/book/index')),
@@ -22,6 +25,7 @@ $this->menu=array(
 	array('label'=>'Rubric', 'url'=>array('/rubric/index'), 'visible'=>Yii::app()->user->isAdmin()),
 	array('label'=>'RubricsBooks', 'url'=>array('/rubricsBooks/index'), 'visible'=>Yii::app()->user->isAdmin()),
 	array('label'=>'Series', 'url'=>array('/series/index')),
+	array('label'=>'SeriesBooksAuthors', 'url'=>array('/seriesBooksAuthors/index')),
 
 );
 

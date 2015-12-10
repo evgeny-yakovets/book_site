@@ -9,11 +9,15 @@
  * @property integer $born
  * @property integer $death
  * @property string $description
+ *
+ * The followings are the available model relations:
+ * @property AuthorsBooks[] $authorsBooks
+ * @property SeriesBooksAuthors[] $seriesBooksAuthors
  */
 class Author extends CActiveRecord
 {
 	/**
-	 * @return string the associated databases table name
+	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
@@ -46,6 +50,8 @@ class Author extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'authorsBooks' => array(self::HAS_MANY, 'AuthorsBooks', 'author_id'),
+			'seriesBooksAuthors' => array(self::HAS_MANY, 'SeriesBooksAuthors', 'author_id'),
 		);
 	}
 
