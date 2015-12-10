@@ -44,7 +44,7 @@ class WebUser extends CWebUser {
     {
         if(isset($this->userId))
         {
-            $this->$userId = $this->userId;
+            //$this->$userId1 = $this->userId;
             return $this->userId;
         }
         return "none";

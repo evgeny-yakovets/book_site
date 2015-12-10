@@ -28,11 +28,12 @@
 
 	<div id="mainmenu">
 		<?php
-		var_dump(Yii::app()->user->type);
-		var_dump(Yii::app()->user->userId);
+		//var_dump(Yii::app()->user->type);
+		//var_dump(Yii::app()->user->userId);
 		$this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
+				array('label'=>'Sign In', 'url'=>array('/user/create'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),

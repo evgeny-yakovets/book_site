@@ -129,7 +129,7 @@ class BookController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex($favoriteBooks = null)
+	public function actionIndex($favoriteBooks = null, $seriesId = null)
 	{
 		$params= array();
 		if($favoriteBooks)
@@ -148,22 +148,31 @@ class BookController extends Controller
 			}
 
 			$params = array(
-				//Критерий для запроса. В этом примере, выбираются все отзывы, которые прошли модерацию.
-				'criteria'=>array('condition'=> 'id IN ('. implode ( ",", $params ).')'));
+				'criteria'=>array('condition'=> 'id IN ('. implode ( ",", $params ).')')
+			);
 		}
 
-		$dataProvider=new CActiveDataProvider('Book', $params);
-/*		if(isset($favoriteBooks))
+		if($seriesId)
 		{
-			$favoriteBooks = Book::model()->findAllBySql('
+			$books = Book::model()->findAllBySql('
 				SELECT b.*
 				FROM db_book AS b
-				INNER JOIN db_favorites AS f
-				ON f.book_id = b.id
-				WHERE f.user_id = 1'
+				INNER JOIN db_series_books_authors AS sba
+				ON sba.book_id = b.id
+				WHERE sba.series_id = ' . $seriesId
 			);
 
-		}*/
+			foreach($books as $book)
+			{
+				$params[] = $book['id'];
+			}
+
+			$params = array(
+				'criteria'=>array('condition'=> 'id IN ('. implode ( ",", $params ).')')
+			);
+		}
+		$dataProvider=new CActiveDataProvider('Book', $params);
+
 		//$dataProvider = $favoriteBooks;
 /*		var_dump($dataProvider);
 		die();*/
