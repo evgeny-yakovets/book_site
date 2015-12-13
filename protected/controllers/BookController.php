@@ -69,8 +69,6 @@ class BookController extends Controller
 		if(isset($_POST['Comment']))
 		{
 			$commentModel = new Comment;
-			var_dump($_POST['Comment']);
-			die();
 			$_POST['Comment']['author'] = Yii::app()->user->name;
 			$commentModel->attributes=$_POST['Comment'];
 			if($commentModel->save())
@@ -125,7 +123,6 @@ class BookController extends Controller
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
-	
 
 	/**
 	 * Lists all models.
