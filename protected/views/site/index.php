@@ -11,7 +11,7 @@ if(!Yii::app()->user->isGuest)
 	$userUrl = Yii::app()->user->userId;
 }
 $this->menu=array(
-	array('label'=>'User','url' => array('/user/'.$userUrl), 'visible'=>!Yii::app()->user->isGuest),
+	array('label'=>'User', 'url'=>array('/user/'.$userUrl), 'visible'=>!Yii::app()->user->isGuest),
 	array('label'=>'Author', 'url'=>array('/author/index'), 'visible'=>Yii::app()->user->isAdmin()),
 	array('label'=>'AuthorsBooks', 'url'=>array('/authorsBooks/index'), 'visible'=>Yii::app()->user->isAdmin()),
 	array('label'=>'Books', 'url'=>array('/book/index')),
