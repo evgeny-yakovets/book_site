@@ -125,11 +125,12 @@ class BookController extends Controller
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
+	
 
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex($favoriteBooks = null, $seriesId = null)
+	public function actionIndex($favoriteBooks = null, $seriesId = null, $title = '', $year = '')
 	{
 		$params= array();
 		if($favoriteBooks)
@@ -171,11 +172,19 @@ class BookController extends Controller
 				'criteria'=>array('condition'=> 'id IN ('. implode ( ",", $params ).')')
 			);
 		}
+
+		if($title || $year)
+		{
+			$criteria = new CDbCriteria();
+			$criteria->addSearchCondition('title', $title, true, 'AND');
+			$criteria->addSearchCondition('year', $year, true, 'AND');
+			$params = array(
+				'criteria'=>$criteria,
+			);
+		}
+
 		$dataProvider=new CActiveDataProvider('Book', $params);
 
-		//$dataProvider = $favoriteBooks;
-/*		var_dump($dataProvider);
-		die();*/
 		$this->render('index',
 			array(
 			'dataProvider'=>$dataProvider,
