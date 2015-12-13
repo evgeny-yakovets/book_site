@@ -49,10 +49,28 @@ class BookController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($id)
+	public function actionView($id, $aBookId = null, $dBookId = null)
 	{
+		if($aBookId)
+		{
+			$this->addFavorite($aBookId);
+			$this->redirect($id,array(
+				'model' => $this->loadModel($id),
+				'isFavorite' => $this->isFavorite($id),
+			));
+		}
+		elseif($dBookId)
+		{
+			$this->deleteFavorite($dBookId);
+			$this->redirect($id,array(
+				'model' => $this->loadModel($id),
+				'isFavorite' => $this->isFavorite($id),
+			));
+		}
+		else
 		$this->render('view',array(
 			'model' => $this->loadModel($id),
+			'isFavorite' => $this->isFavorite($id),
 		));
 	}
 
@@ -84,6 +102,64 @@ class BookController extends Controller
 		$this->render('create',array(
 			'model'=>$model,
 		));
+	}
+
+	/**
+	 * Creates a new model.
+	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 */
+	public function addFavorite($bookId = null)
+	{
+		$model=new Favorites;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if($bookId)
+		{
+			$attributes['user_id'] = Yii::app()->user->userId;
+			$attributes['book_id'] = $bookId;
+
+			$model->attributes=$attributes;
+			$model->save();
+		}
+	}
+
+	public function deleteFavorite($bookId = null)
+	{
+		$favorites = Favorites::model()->findAllBySql('
+		SELECT f.*
+		FROM db_favorites AS f
+		WHERE f.user_id = '. Yii::app()->user->userId .'
+		AND f.book_id = '. $bookId
+		);
+		if($favorites)
+		{
+			foreach($favorites as $favorite)
+			{
+				$favorite->delete();
+			}
+
+		}
+
+	}
+
+	public function isFavorite($bookId = null)
+	{
+		$favorites = Favorites::model()->findAllBySql('
+		SELECT f.*
+		FROM db_favorites AS f
+		WHERE f.user_id = '. Yii::app()->user->userId .'
+		AND f.book_id = '. $bookId
+		);
+		if($favorites)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	/**
@@ -130,6 +206,8 @@ class BookController extends Controller
 	public function actionIndex($favoriteBooks = null, $seriesId = null, $title = '', $year = '')
 	{
 		$params= array();
+
+
 		if($favoriteBooks)
 		{
 			$books = Book::model()->findAllBySql('
@@ -140,14 +218,21 @@ class BookController extends Controller
 				WHERE f.user_id = ' . Yii::app()->user->userId
 			);
 
-			foreach($books as $book)
+				foreach($books as $book)
+				{
+					$params[] = $book['id'];
+				}
+			if(!$params)
 			{
-				$params[] = $book['id'];
+				$params[] = -1;
 			}
 
-			$params = array(
-				'criteria'=>array('condition'=> 'id IN ('. implode ( ",", $params ).')')
-			);
+				$params = array(
+					'criteria'=>array(
+						'condition'=> 'id IN ('. implode ( ",", $params ).')'
+					)
+				);
+
 		}
 
 		if($seriesId)

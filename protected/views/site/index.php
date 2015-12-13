@@ -25,7 +25,7 @@ $this->menu=array(
 	array('label'=>'Rubric', 'url'=>array('/rubric/index'), 'visible'=>Yii::app()->user->isAdmin()),
 	array('label'=>'RubricsBooks', 'url'=>array('/rubricsBooks/index'), 'visible'=>Yii::app()->user->isAdmin()),
 	array('label'=>'Series', 'url'=>array('/series/index')),
-	array('label'=>'SeriesBooksAuthors', 'url'=>array('/seriesBooksAuthors/index')),
+	array('label'=>'SeriesBooksAuthors', 'url'=>array('/seriesBooksAuthors/index'), 'visible'=>Yii::app()->user->isAdmin()),
 
 );
 

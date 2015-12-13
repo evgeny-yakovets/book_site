@@ -46,14 +46,9 @@
 		<?php echo $form->error($model,'password'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'type'); ?>
-		<?php echo $form->textField($model,'type',array('size'=>5,'maxlength'=>5)); ?>
-		<?php echo $form->error($model,'type'); ?>
-	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton('Create'); ?>
 	</div>
 
 	<?php $this->endWidget(); ?>

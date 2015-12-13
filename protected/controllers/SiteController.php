@@ -34,9 +34,11 @@ class SiteController extends Controller
 
 		if(isset($_POST['User']))
 		{
-			$model->attributes=$_POST['User'];
+			$attributes = $_POST['User'];
+			$attributes['type'] = 'type';
+			$model->attributes = $attributes;
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect('login');
 		}
 
 		$this->render('create',array(

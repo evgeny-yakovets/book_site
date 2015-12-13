@@ -6,6 +6,14 @@ $this->breadcrumbs=array(
 	'Books'=>array('index'),
 	$model->title,
 );
+if(!$isFavorite)
+{
+	$favorite = array('label'=>'Add to favorite', 'url'=>array($model->id,'aBookId'=>$model->id), 'visible'=>!Yii::app()->user->isGuest);
+}
+else
+{
+	$favorite = array('label'=>'Delete from favorites', 'url'=>array($model->id,'dBookId'=>$model->id), 'visible'=>!Yii::app()->user->isGuest);
+}
 
 $this->menu=array(
 	array('label'=>'List Book', 'url'=>array('index'), 'visible'=>!Yii::app()->user->isGuest),
@@ -14,6 +22,7 @@ $this->menu=array(
 	array('label'=>'Delete Book', 'url'=>'#', 'visible'=>Yii::app()->user->isAdmin(), 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Manage Book', 'url'=>array('admin'), 'visible'=>Yii::app()->user->isAdmin()),
 	array('label'=>'Add comment', 'url'=>array('/comment/create','bookId'=>$model->id), 'visible'=>!Yii::app()->user->isGuest),
+	$favorite,
 );
 ?>
 
@@ -42,25 +51,6 @@ if(isset($model->rubric)) {
 }
 ?>
 
-<!--	<table class="detail-view" id="yw1">
-		<tbody>
-		<tr class="odd">
-			<th>Files</th>
-			<td>-->
-				<?php
-/*					if(isset($model->files))
-					{
-						foreach($model->files as $file)
-						{
-							echo CHtml::link(CHtml::encode($file->type), array('view', 'id'=>$file->url))."<br>";
-						}
-					}*/
-				?>
-<!--			</td>
-		</tr>
-		</tbody>
-	</table>-->
-
 	<div class="view">
 		<b><?php echo CHtml::encode('Files:')."<br>"; ?></b>
 		<?php
@@ -68,8 +58,6 @@ if(isset($model->rubric)) {
 			{
 				foreach($model->files as $file)
 				{
-					//echo CHtml::link(CHtml::encode($file->type), array('view', 'id'=>'GetFile/'.$file->title))."<br>";
-					//echo "<a href=".'GetFile/'.$file->title.">".$file->type."</a><br>";
 					echo "<a href=http://localhost/upload/".$file->title.">".$file->type."</a><br>";
 				}
 			}
