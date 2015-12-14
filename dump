@@ -1,0 +1,4 @@
+
+HELL=/bin/bash
+MAILTO=user
+* 23 * * * /usr/bin/mysqldump -uroot -proot db_books | gzip -c > /var/www/html/db_dump/db_books.gz
