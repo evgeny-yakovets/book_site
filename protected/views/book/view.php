@@ -6,24 +6,37 @@ $this->breadcrumbs=array(
 	'Books'=>array('index'),
 	$model->title,
 );
-if(!$isFavorite)
+
+if(!Yii::app()->user->isGuest)
 {
-	$favorite = array('label'=>'Add to favorite', 'url'=>array($model->id,'aBookId'=>$model->id), 'visible'=>!Yii::app()->user->isGuest);
+	$favorite = '';
+	if(!$isFavorite && isset($isFavorite))
+	{
+		$favorite = array('label'=>'Add to favorite', 'url'=>array($model->id,'aBookId'=>$model->id), 'visible'=>!Yii::app()->user->isGuest);
+	}
+	else
+	{
+		$favorite = array('label'=>'Delete from favorites', 'url'=>array($model->id,'dBookId'=>$model->id), 'visible'=>!Yii::app()->user->isGuest);
+	}
+	$this->menu = array(
+		array('label'=>'List Book', 'url'=>array('index'), 'visible'=>!Yii::app()->user->isGuest),
+		array('label'=>'Create Book', 'url'=>array('create'), 'visible'=>Yii::app()->user->isAdmin()),
+		array('label'=>'Update Book', 'url'=>array('update', 'id'=>$model->id), 'visible'=>Yii::app()->user->isAdmin()),
+		array('label'=>'Delete Book', 'url'=>'#', 'visible'=>Yii::app()->user->isAdmin(), 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+		array('label'=>'Manage Book', 'url'=>array('admin'), 'visible'=>Yii::app()->user->isAdmin()),
+		array('label'=>'Add comment', 'url'=>array('/comment/create','bookId'=>$model->id), 'visible'=>!Yii::app()->user->isGuest),
+		$favorite,
+	);
+
 }
 else
 {
-	$favorite = array('label'=>'Delete from favorites', 'url'=>array($model->id,'dBookId'=>$model->id), 'visible'=>!Yii::app()->user->isGuest);
+	$this->menu = array(
+		array('label'=>'List Book', 'url'=>array('index'), 'visible'=>!Yii::app()->user->isGuest),
+	);
 }
 
-$this->menu=array(
-	array('label'=>'List Book', 'url'=>array('index'), 'visible'=>!Yii::app()->user->isGuest),
-	array('label'=>'Create Book', 'url'=>array('create'), 'visible'=>Yii::app()->user->isAdmin()),
-	array('label'=>'Update Book', 'url'=>array('update', 'id'=>$model->id), 'visible'=>Yii::app()->user->isAdmin()),
-	array('label'=>'Delete Book', 'url'=>'#', 'visible'=>Yii::app()->user->isAdmin(), 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Book', 'url'=>array('admin'), 'visible'=>Yii::app()->user->isAdmin()),
-	array('label'=>'Add comment', 'url'=>array('/comment/create','bookId'=>$model->id), 'visible'=>!Yii::app()->user->isGuest),
-	$favorite,
-);
+
 ?>
 
 <h1><?php echo $model->title; ?></h1>

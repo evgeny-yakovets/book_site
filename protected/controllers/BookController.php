@@ -51,27 +51,34 @@ class BookController extends Controller
 	 */
 	public function actionView($id, $aBookId = null, $dBookId = null)
 	{
-		if($aBookId)
+		if(!Yii::app()->user->isGuest)
 		{
-			$this->addFavorite($aBookId);
-			$this->redirect($id,array(
-				'model' => $this->loadModel($id),
-				'isFavorite' => $this->isFavorite($id),
-			));
-		}
-		elseif($dBookId)
-		{
-			$this->deleteFavorite($dBookId);
-			$this->redirect($id,array(
-				'model' => $this->loadModel($id),
-				'isFavorite' => $this->isFavorite($id),
-			));
+			if($aBookId)
+			{
+				$this->addFavorite($aBookId);
+				$this->redirect($id,array(
+					'model' => $this->loadModel($id),
+					'isFavorite' => $this->isFavorite($id),
+				));
+			}
+			elseif($dBookId)
+			{
+				$this->deleteFavorite($dBookId);
+				$this->redirect($id,array(
+					'model' => $this->loadModel($id),
+					'isFavorite' => $this->isFavorite($id),
+				));
+			}
+			else
+				$this->render('view',array(
+					'model' => $this->loadModel($id),
+					'isFavorite' => $this->isFavorite($id),
+				));
 		}
 		else
-		$this->render('view',array(
-			'model' => $this->loadModel($id),
-			'isFavorite' => $this->isFavorite($id),
-		));
+			$this->render('view',array(
+				'model' => $this->loadModel($id),
+			));
 	}
 
 	/**
