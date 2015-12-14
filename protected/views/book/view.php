@@ -39,7 +39,7 @@ else
 
 ?>
 
-<h1><?php echo $model->title; ?></h1>
+<h1><?php echo $model->title . ' - ' . implode(', ',$author); ?></h1>
 
 <?php
 

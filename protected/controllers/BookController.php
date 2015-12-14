@@ -51,6 +51,20 @@ class BookController extends Controller
 	 */
 	public function actionView($id, $aBookId = null, $dBookId = null)
 	{
+		$authorsNames = [];
+		$authors = Author::model()->findAllBySql('
+		SELECT a.*
+		FROM db_author AS a
+		INNER JOIN db_authors_books AS ab
+		ON ab.author_id = a.id
+		WHERE ab.book_id = '.$id
+		);
+
+		foreach($authors as $author)
+		{
+			$authorsNames[] = $author['name'];
+		}
+
 		if(!Yii::app()->user->isGuest)
 		{
 			if($aBookId)
@@ -59,6 +73,7 @@ class BookController extends Controller
 				$this->redirect($id,array(
 					'model' => $this->loadModel($id),
 					'isFavorite' => $this->isFavorite($id),
+					'author' => $authorsNames,
 				));
 			}
 			elseif($dBookId)
@@ -67,17 +82,20 @@ class BookController extends Controller
 				$this->redirect($id,array(
 					'model' => $this->loadModel($id),
 					'isFavorite' => $this->isFavorite($id),
+					'author' => $authorsNames,
 				));
 			}
 			else
 				$this->render('view',array(
 					'model' => $this->loadModel($id),
 					'isFavorite' => $this->isFavorite($id),
+					'author' => $authorsNames,
 				));
 		}
 		else
 			$this->render('view',array(
 				'model' => $this->loadModel($id),
+				'author' => $authorsNames,
 			));
 	}
 
