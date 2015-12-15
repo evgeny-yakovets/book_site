@@ -228,7 +228,7 @@ class BookController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex($favoriteBooks = null, $seriesId = null, $title = '', $year = '')
+	public function actionIndex($favoriteBooks = null, $seriesId = null, $title = null, $year = null)
 	{
 		$params= array();
 

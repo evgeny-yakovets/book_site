@@ -120,12 +120,24 @@ class SeriesController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
+	public function actionIndex($title = null)
 	{
-		$dataProvider=new CActiveDataProvider('Series');
+		$params= array();
+
+		if($title)
+		{
+			$criteria = new CDbCriteria();
+			$criteria->addSearchCondition('title', $title, true, 'AND');
+			$params = array(
+				'criteria'=>$criteria,
+			);
+		}
+
+		$dataProvider=new CActiveDataProvider('Series', $params);
+
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+				'dataProvider'=>$dataProvider,
+			));
 	}
 
 	/**

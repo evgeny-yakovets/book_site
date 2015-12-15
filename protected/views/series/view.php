@@ -13,7 +13,7 @@ $this->menu=array(
 	array('label'=>'Update Series', 'url'=>array('update', 'id'=>$model->id), 'visible'=>Yii::app()->user->isAdmin()),
 	array('label'=>'Delete Series', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?'), 'visible'=>Yii::app()->user->isAdmin()),
 	array('label'=>'Manage Series', 'url'=>array('admin'), 'visible'=>Yii::app()->user->isAdmin()),
-	array('label'=>'List of books', 'url'=>array('book/index','seriesId'=>$model->id), 'visible'=>Yii::app()->user->isGuest),
+	array('label'=>'List of books', 'url'=>array('book/index','seriesId'=>$model->id)),
 );
 ?>
 
